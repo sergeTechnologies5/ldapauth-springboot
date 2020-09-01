@@ -9,10 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.innovativeintelli.ldapauthenticationjwttoken.payload.ApiResponse;
 import com.innovativeintelli.ldapauthenticationjwttoken.payload.JwtAuthenticationResponse;
@@ -22,7 +19,7 @@ import com.innovativeintelli.ldapauthenticationjwttoken.security.JwtTokenProvide
 import com.innovativeintelli.ldapauthenticationjwttoken.util.MessageConstants;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("jiokolee/api")
 public class AuthController {
 
     @Autowired
@@ -33,7 +30,7 @@ public class AuthController {
     JwtTokenProvider tokenProvider;
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@PostMapping("/generatetoken")
+	@PostMapping("auth/token")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
     	if(loginRequest.getUsername().isEmpty() || loginRequest.getPassword().isEmpty()) {
     		 return new ResponseEntity(new ApiResponse(false, MessageConstants.USERNAME_OR_PASSWORD_INVALID),
@@ -50,7 +47,7 @@ public class AuthController {
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@PostMapping("/validatetoken")
+	@PostMapping("auth/token/validate")
     public ResponseEntity<?> getTokenByCredentials(@Validated @RequestBody ValidateTokenRequest validateToken) {
     	 String username = null;
     	 String jwt =validateToken.getToken();

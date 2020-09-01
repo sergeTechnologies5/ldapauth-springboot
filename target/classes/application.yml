@@ -6,8 +6,12 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
 server:
-  port: '8085'
+  port: '8086'
 spring:
   ldap:
     embedded:
